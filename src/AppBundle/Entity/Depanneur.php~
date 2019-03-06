@@ -1,0 +1,53 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Depanneur
+ *
+ * @ORM\Table(name="depanneur", indexes={@ORM\Index(name="id_specialite", columns={"id_specialite"})})
+ * @ORM\Entity
+ */
+class Depanneur
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=255, nullable=false)
+     */
+    private $nom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prenom", type="string", length=255, nullable=false)
+     */
+    private $prenom;
+
+    /**
+     * @var \Depannage
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="Depannage")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id", referencedColumnName="id_depanneurs")
+     * })
+     */
+    private $id;
+
+    /**
+     * @var \Specialite
+     *
+     * @ORM\ManyToOne(targetEntity="Specialite")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_specialite", referencedColumnName="id")
+     * })
+     */
+    private $idSpecialite;
+
+
+}
+

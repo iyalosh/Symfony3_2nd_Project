@@ -1,0 +1,70 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Depannage
+ *
+ * @ORM\Table(name="depannage", indexes={@ORM\Index(name="id_depanneurs", columns={"id_depanneurs"}), @ORM\Index(name="id_panne", columns={"id_panne"}), @ORM\Index(name="id_voiture", columns={"id_voiture"})})
+ * @ORM\Entity
+ */
+class Depannage
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_start", type="datetime", nullable=false)
+     */
+    private $dateStart;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_end", type="datetime", nullable=false)
+     */
+    private $dateEnd;
+
+    /**
+     * @var \Depanneur
+     *
+     * @ORM\ManyToOne(targetEntity="Depanneur")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_depanneurs", referencedColumnName="id")
+     * })
+     */
+    private $idDepanneurs;
+
+    /**
+     * @var \Panne
+     *
+     * @ORM\ManyToOne(targetEntity="Panne")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_panne", referencedColumnName="id")
+     * })
+     */
+    private $idPanne;
+
+    /**
+     * @var \Voiture
+     *
+     * @ORM\ManyToOne(targetEntity="Voiture")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_voiture", referencedColumnName="id")
+     * })
+     */
+    private $idVoiture;
+
+
+}
+
